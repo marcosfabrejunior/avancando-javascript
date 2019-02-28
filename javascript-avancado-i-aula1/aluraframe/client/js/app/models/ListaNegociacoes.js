@@ -1,6 +1,6 @@
 class ListaNegociacoes {
     
-    constructor() {
+    constructor(contexto) {
         
         this._negociacoes = [];
         this._contexto = contexto;
