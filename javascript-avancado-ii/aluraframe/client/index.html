@@ -45,7 +45,7 @@
     <br>
     
     <div id="negociacoesView"></div>
-    
+    <script src="js/app/services/ConnectionFactory.js"></script>
     <script src="js/app/models/Negociacao.js"></script>
     <script src="js/app/controllers/NegociacaoController.js"></script>
     <script src="js/app/helpers/DateHelper.js"></script>
@@ -58,9 +58,11 @@
     <script src="js/app/helpers/Bind.js"></script>
     <script src="js/app/services/NegociacaoService.js"></script>
     <script src="js/app/services/HttpService.js"></script>
-    <script src="js/app/services/ConnectionFactory.js"></script>
+
+    <script src="js/app/dao/NegociacaoDao.js"></script>
     <script>
         let negociacaoController = new NegociacaoController();
+        console.log(ConnectionFactory);
     </script>
     
 </body>

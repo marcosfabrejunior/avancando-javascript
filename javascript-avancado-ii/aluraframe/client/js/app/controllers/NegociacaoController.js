@@ -19,7 +19,19 @@ class NegociacaoController {
     }
 
     adiciona(event) {
-
+        event.preventDefault();
+        ConnectionFactory
+            .getConnection()
+            .then(connection => {
+                let negociacao = this._criaNegociacao();
+                new NegociacaoDao(connection)
+                    .adiciona(negociacao)
+                    .then(() => {
+                        this._listaNegociacoes.adiciona(negociacao);
+                        this._mensagem.texto = 'Negociação adicionada com sucesso';
+                        this._limpaFormulario();
+                    });
+            }).catch(erro => this._mensagem.texto = erro);
         event.preventDefault();
         this._listaNegociacoes.adiciona(this._criaNegociacao());
         this._mensagem.texto = 'Negociação adicionada com sucesso';
@@ -33,13 +45,13 @@ class NegociacaoController {
             service.obterNegociacoesDaSemana(),
             service.obterNegociacoesDaSemanaAnterior(),
             service.obterNegociacoesDaSemanaRetrasada()
-        ]  
+        ]
         ).then(negociacoes => {
             negociacoes
-                .reduce((arrayAchatado, array) => arrayAchatado.concat(array),[])
+                .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
                 .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
         })
-        .catch(error => this._mensagem.texto = error);
+            .catch(error => this._mensagem.texto = error);
 
 
         //refatoração 2
